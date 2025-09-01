@@ -32,6 +32,9 @@ import ultraNulgathImage from "figma:asset/071c2b26a2311bd10eedb84b4ab7e6b3f5200
 import ultraDageImage from "figma:asset/3f95d1ffc35d266e13456f747e0f1cd22d633657.png";
 import cruelLogo from "figma:asset/337a7d9ed614b4dbbc2134f4b3a94da58330a8aa.png";
 import { UltraDageGuide } from "./components/UltraDageGuide";
+import { UltraDarkonGuide } from "./components/UltraDarkonGuide";
+import { UltraDragoGuide } from "./components/UltraDragoGuide";
+import { UltraGramielGuide } from "./components/UltraGramielGuide";
 
 const bosses = [
   {
@@ -52,7 +55,7 @@ const bosses = [
     id: "ultra-dage",
     name: "Ultra Dage",
     icon: Shield,
-    description: "The Evil",
+    description: "The Dark Lord",
     difficulty: "Ultra",
   },
   {
@@ -66,7 +69,7 @@ const bosses = [
     id: "ultra-drago",
     name: "Ultra Drago",
     icon: Flame,
-    description: "The King",
+    description: "The Tyrant of Astravia",
     difficulty: "Ultra",
   },
   {
@@ -88,7 +91,7 @@ const bosses = [
 const themeColors = {
   "champion-drakath": "#9333ea", // Purple - default
   "ultra-nulgath": "#375d4f",
-  "ultra-dage": "#3976af", 
+  "ultra-dage": "#3976af",
   "ultra-darkon": "#b83e3f",
   "ultra-drago": "#b83e3f",
   "ultra-gramiel": "#dad6af",
@@ -105,7 +108,8 @@ export default function App() {
     (boss) => boss.id === selectedBoss,
   );
 
-  const currentTheme = themeColors[selectedBoss as keyof typeof themeColors];
+  const currentTheme =
+    themeColors[selectedBoss as keyof typeof themeColors];
 
   // Trigger icon animation when boss changes
   useEffect(() => {
@@ -115,14 +119,19 @@ export default function App() {
   }, [selectedBoss]);
 
   // Ripple effect function
-  const createRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const createRipple = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     const button = e.currentTarget;
     const rect = button.getBoundingClientRect();
-    const ripple = document.createElement('span');
-    const size = Math.max(button.offsetWidth, button.offsetHeight);
+    const ripple = document.createElement("span");
+    const size = Math.max(
+      button.offsetWidth,
+      button.offsetHeight,
+    );
     const x = e.clientX - rect.left - size / 2;
     const y = e.clientY - rect.top - size / 2;
-    
+
     ripple.style.cssText = `
       position: absolute;
       width: ${size}px;
@@ -135,11 +144,11 @@ export default function App() {
       animation: ripple 0.6s ease-out;
       pointer-events: none;
     `;
-    
-    button.style.position = 'relative';
-    button.style.overflow = 'hidden';
+
+    button.style.position = "relative";
+    button.style.overflow = "hidden";
     button.appendChild(ripple);
-    
+
     setTimeout(() => {
       if (ripple.parentNode) {
         ripple.parentNode.removeChild(ripple);
@@ -217,239 +226,264 @@ export default function App() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: dynamicStyles }} />
+      <style
+        dangerouslySetInnerHTML={{ __html: dynamicStyles }}
+      />
       <div className="min-h-screen dark-gaming-bg">
         {/* Main Content Container */}
         <div className="relative z-10">
-      {/* Header */}
-      <header 
-        className="border-b bg-black/30 backdrop-blur-md transition-all duration-500 relative z-20"
-        style={{
-          borderColor: `${currentTheme}50`,
-          boxShadow: `0 4px 20px ${currentTheme}20`
-        }}
-      >
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-4">
-              <img
-                src={cruelLogo}
-                alt="Cruel's Logo"
-                className="h-12 w-12 object-contain transition-all duration-300 hover:rotate-12 hover:scale-110"
-                style={{
-                  filter: `drop-shadow(0 0 10px ${currentTheme}40)`
-                }}
-              />
-              <div>
-                <h1 className="text-3xl font-bold text-white transition-all duration-300 hover:scale-105">
-                  Cruel's AQW Ultra Guide
-                </h1>
-                <p 
-                  className="transition-colors duration-500"
-                  style={{ color: currentTheme }}
+          {/* Header */}
+          <header
+            className="border-b bg-black/30 backdrop-blur-md transition-all duration-500 relative z-20"
+            style={{
+              borderColor: `${currentTheme}50`,
+              boxShadow: `0 4px 20px ${currentTheme}20`,
+            }}
+          >
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={cruelLogo}
+                    alt="Cruel's Logo"
+                    className="h-12 w-12 object-contain transition-all duration-300 hover:rotate-12 hover:scale-110"
+                    style={{
+                      filter: `drop-shadow(0 0 10px ${currentTheme}40)`,
+                    }}
+                  />
+                  <div>
+                    <h1 className="text-3xl font-bold text-white transition-all duration-300 hover:scale-105">
+                      Cruel's AQW Ultra Guide
+                    </h1>
+                    <p
+                      className="transition-colors duration-500"
+                      style={{ color: currentTheme }}
+                    >
+                      Aenaen The Most Handsome Cruel
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div className="container mx-auto px-4 py-8 relative z-15">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              {/* Sidebar Navigation */}
+              <div className="lg:col-span-1">
+                <Card
+                  className="bg-black/85 backdrop-blur-md transition-all duration-500 hover:bg-black/90 relative"
+                  style={{
+                    borderColor: `${currentTheme}66`,
+                    boxShadow: `0 8px 32px ${currentTheme}20, inset 0 1px 0 ${currentTheme}20`,
+                  }}
                 >
-                  Aenaen The Most Handsome Cruel
-                </p>
+                  <CardHeader>
+                    <CardTitle className="text-white">
+                      Ultra Bosses
+                    </CardTitle>
+                    <CardDescription
+                      className="transition-colors duration-500"
+                      style={{ color: `${currentTheme}cc` }}
+                    >
+                      Select a boss to view the complete guide
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <ScrollArea className="h-96">
+                      <div className="p-4 space-y-2">
+                        {bosses.map((boss) => {
+                          const IconComponent = boss.icon;
+                          return (
+                            <Button
+                              key={boss.id}
+                              variant={
+                                selectedBoss === boss.id
+                                  ? "default"
+                                  : "ghost"
+                              }
+                              className={`w-full justify-start gap-3 h-auto p-3 transition-all duration-300 transform hover:scale-105 ${
+                                selectedBoss === boss.id
+                                  ? "text-white shadow-lg"
+                                  : "text-gray-300 hover:shadow-md"
+                              }`}
+                              style={{
+                                backgroundColor:
+                                  selectedBoss === boss.id
+                                    ? currentTheme
+                                    : "transparent",
+                                boxShadow:
+                                  selectedBoss === boss.id
+                                    ? `0 0 20px ${currentTheme}40`
+                                    : "none",
+                              }}
+                              onMouseEnter={(e) => {
+                                if (selectedBoss !== boss.id) {
+                                  e.currentTarget.style.backgroundColor = `${currentTheme}20`;
+                                  e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}30`;
+                                } else {
+                                  e.currentTarget.style.boxShadow = `0 0 25px ${currentTheme}60`;
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (selectedBoss !== boss.id) {
+                                  e.currentTarget.style.backgroundColor =
+                                    "transparent";
+                                  e.currentTarget.style.boxShadow =
+                                    "none";
+                                } else {
+                                  e.currentTarget.style.boxShadow = `0 0 20px ${currentTheme}40`;
+                                }
+                              }}
+                              onClick={(e) => {
+                                // Add click animation and ripple effect
+                                createRipple(e);
+                                e.currentTarget.style.transform =
+                                  "scale(0.95)";
+                                setTimeout(() => {
+                                  e.currentTarget.style.transform =
+                                    "scale(1.05)";
+                                }, 100);
+                                setSelectedBoss(boss.id);
+                              }}
+                            >
+                              <IconComponent className="h-5 w-5" />
+                              <div className="text-left flex-1">
+                                <div className="font-medium">
+                                  {boss.name}
+                                </div>
+                                <div className="text-xs opacity-70">
+                                  {boss.description}
+                                </div>
+                              </div>
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    </ScrollArea>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Main Content */}
+              <div className="lg:col-span-3">
+                <Card
+                  className="bg-black/85 backdrop-blur-md transition-all duration-500 hover:bg-black/90 relative"
+                  style={{
+                    borderColor: `${currentTheme}66`,
+                    boxShadow: `0 8px 32px ${currentTheme}20, inset 0 1px 0 ${currentTheme}20`,
+                  }}
+                >
+                  <CardHeader>
+                    <div className="flex items-center gap-4">
+                      {currentBoss && (
+                        <>
+                          <currentBoss.icon
+                            className={`h-8 w-8 transition-all duration-500 ${animateIcon ? "animate-pulse scale-125" : ""}`}
+                            style={{
+                              color: currentTheme,
+                              filter: `drop-shadow(0 0 10px ${currentTheme}60)`,
+                            }}
+                          />
+                          <div>
+                            <CardTitle className="text-2xl text-white">
+                              {currentBoss.name}
+                            </CardTitle>
+                            <CardDescription
+                              className="transition-colors duration-500"
+                              style={{
+                                color: `${currentTheme}cc`,
+                              }}
+                            >
+                              {currentBoss.description}
+                            </CardDescription>
+                          </div>
+                          <Badge
+                            variant="destructive"
+                            className="ml-auto"
+                          >
+                            {currentBoss.difficulty}
+                          </Badge>
+                        </>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    {selectedBoss === "champion-drakath" ? (
+                      <ChampionDrakathGuide />
+                    ) : selectedBoss === "ultra-nulgath" ? (
+                      <UltraNulgathGuide />
+                    ) : selectedBoss === "ultra-dage" ? (
+                      <UltraDageGuide />
+                    ) : selectedBoss === "ultra-darkon" ? (
+                      <UltraDarkonGuide />
+                    ) : selectedBoss === "ultra-drago" ? (
+                      <UltraDragoGuide />
+                    ) : selectedBoss === "ultra-gramiel" ? (
+                      <UltraGramielGuide />
+                    ) : (
+                      <div className="py-12"></div>
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
-        </div>
-      </header>
 
-      <div className="container mx-auto px-4 py-8 relative z-15">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Navigation */}
-          <div className="lg:col-span-1">
-            <Card 
-              className="bg-black/85 backdrop-blur-md transition-all duration-500 hover:bg-black/90 relative"
-              style={{
-                borderColor: `${currentTheme}66`,
-                boxShadow: `0 8px 32px ${currentTheme}20, inset 0 1px 0 ${currentTheme}20`
-              }}
-            >
-              <CardHeader>
-                <CardTitle className="text-white">
-                  Ultra Bosses
-                </CardTitle>
-                <CardDescription 
-                  className="transition-colors duration-500"
-                  style={{ color: `${currentTheme}cc` }}
-                >
-                  Select a boss to view the complete guide
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-0">
-                <ScrollArea className="h-96">
-                  <div className="p-4 space-y-2">
-                    {bosses.map((boss) => {
-                      const IconComponent = boss.icon;
-                      return (
-                        <Button
-                          key={boss.id}
-                          variant={
-                            selectedBoss === boss.id
-                              ? "default"
-                              : "ghost"
-                          }
-                          className={`w-full justify-start gap-3 h-auto p-3 transition-all duration-300 transform hover:scale-105 ${
-                            selectedBoss === boss.id
-                              ? "text-white shadow-lg"
-                              : "text-gray-300 hover:shadow-md"
-                          }`}
-                          style={{
-                            backgroundColor: selectedBoss === boss.id ? currentTheme : 'transparent',
-                            boxShadow: selectedBoss === boss.id ? `0 0 20px ${currentTheme}40` : 'none'
-                          }}
-                          onMouseEnter={(e) => {
-                            if (selectedBoss !== boss.id) {
-                              e.currentTarget.style.backgroundColor = `${currentTheme}20`;
-                              e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}30`;
-                            } else {
-                              e.currentTarget.style.boxShadow = `0 0 25px ${currentTheme}60`;
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (selectedBoss !== boss.id) {
-                              e.currentTarget.style.backgroundColor = 'transparent';
-                              e.currentTarget.style.boxShadow = 'none';
-                            } else {
-                              e.currentTarget.style.boxShadow = `0 0 20px ${currentTheme}40`;
-                            }
-                          }}
-                          onClick={(e) => {
-                            // Add click animation and ripple effect
-                            createRipple(e);
-                            e.currentTarget.style.transform = 'scale(0.95)';
-                            setTimeout(() => {
-                              e.currentTarget.style.transform = 'scale(1.05)';
-                            }, 100);
-                            setSelectedBoss(boss.id);
-                          }}
-                        >
-                          <IconComponent className="h-5 w-5" />
-                          <div className="text-left flex-1">
-                            <div className="font-medium">
-                              {boss.name}
-                            </div>
-                            <div className="text-xs opacity-70">
-                              {boss.description}
-                            </div>
-                          </div>
-                        </Button>
-                      );
-                    })}
-                  </div>
-                </ScrollArea>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            <Card 
-              className="bg-black/85 backdrop-blur-md transition-all duration-500 hover:bg-black/90 relative"
-              style={{
-                borderColor: `${currentTheme}66`,
-                boxShadow: `0 8px 32px ${currentTheme}20, inset 0 1px 0 ${currentTheme}20`
-              }}
-            >
-              <CardHeader>
-                <div className="flex items-center gap-4">
-                  {currentBoss && (
-                    <>
-                      <currentBoss.icon 
-                        className={`h-8 w-8 transition-all duration-500 ${animateIcon ? 'animate-pulse scale-125' : ''}`}
-                        style={{ 
-                          color: currentTheme,
-                          filter: `drop-shadow(0 0 10px ${currentTheme}60)`
-                        }}
-                      />
-                      <div>
-                        <CardTitle className="text-2xl text-white">
-                          {currentBoss.name}
-                        </CardTitle>
-                        <CardDescription 
-                          className="transition-colors duration-500"
-                          style={{ color: `${currentTheme}cc` }}
-                        >
-                          {currentBoss.description}
-                        </CardDescription>
-                      </div>
-                      <Badge
-                        variant="destructive"
-                        className="ml-auto"
-                      >
-                        {currentBoss.difficulty}
-                      </Badge>
-                    </>
-                  )}
+          {/* Footer */}
+          <footer
+            className="border-t bg-black/30 backdrop-blur-md mt-16 transition-all duration-500 relative z-20"
+            style={{
+              borderColor: `${currentTheme}50`,
+              boxShadow: `0 -4px 20px ${currentTheme}20`,
+            }}
+          >
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="text-center md:text-left">
+                  <p className="text-gray-300">
+                    © 2025 All rights reserved by{" "}
+                    <span
+                      className="font-medium transition-colors duration-500"
+                      style={{ color: currentTheme }}
+                    >
+                      Cruel
+                    </span>
+                  </p>
                 </div>
-              </CardHeader>
-              <CardContent>
-                {selectedBoss === "champion-drakath" ? (
-                  <ChampionDrakathGuide />
-                ) : selectedBoss === "ultra-nulgath" ? (
-                  <UltraNulgathGuide />
-                ) : selectedBoss === "ultra-dage" ? (
-                  <UltraDageGuide />
-                ) : (
-                  <div className="py-12">
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
 
-      {/* Footer */}
-      <footer 
-        className="border-t bg-black/30 backdrop-blur-md mt-16 transition-all duration-500 relative z-20"
-        style={{
-          borderColor: `${currentTheme}50`,
-          boxShadow: `0 -4px 20px ${currentTheme}20`
-        }}
-      >
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-center md:text-left">
-              <p className="text-gray-300">
-                © 2025 All rights reserved by{" "}
-                <span 
-                  className="font-medium transition-colors duration-500"
-                  style={{ color: currentTheme }}
-                >
-                  Cruel
-                </span>
-              </p>
+                <div className="flex items-center gap-4">
+                  <span
+                    className="text-gray-300 transition-colors duration-500"
+                    style={{ color: `${currentTheme}cc` }}
+                  >
+                    Need help with ultra clears?
+                  </span>
+                  <a
+                    href="https://discord.gg/aqwcruel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+                    style={{
+                      backgroundColor: currentTheme,
+                      boxShadow: `0 0 15px ${currentTheme}40`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = `0 0 25px ${currentTheme}60`;
+                      e.currentTarget.style.opacity = "0.9";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}40`;
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    <span>Join Our Discord</span>
+                  </a>
+                </div>
+              </div>
             </div>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="https://discord.gg/aqwcruel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 text-white rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
-                style={{
-                  backgroundColor: currentTheme,
-                  boxShadow: `0 0 15px ${currentTheme}40`
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 25px ${currentTheme}60`;
-                  e.currentTarget.style.opacity = '0.9';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}40`;
-                  e.currentTarget.style.opacity = '1';
-                }}
-              >
-                <MessageCircle className="h-5 w-5" />
-                <span>Join Our Discord</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+          </footer>
         </div>
       </div>
     </>
@@ -458,7 +492,7 @@ export default function App() {
 
 function ChampionDrakathGuide() {
   const currentTheme = themeColors["champion-drakath"];
-  
+
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -468,39 +502,39 @@ function ChampionDrakathGuide() {
           className="w-full h-auto rounded-lg shadow-lg border transition-all duration-300 hover:shadow-xl"
           style={{
             borderColor: `${currentTheme}66`,
-            boxShadow: `0 0 30px ${currentTheme}20`
+            boxShadow: `0 0 30px ${currentTheme}20`,
           }}
         />
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList 
+        <TabsList
           className="grid w-full grid-cols-4 bg-black/80 backdrop-blur-sm transition-all duration-500 p-1"
           style={{
             borderColor: `${currentTheme}66`,
-            border: `1px solid ${currentTheme}66`
+            border: `1px solid ${currentTheme}66`,
           }}
         >
-          <TabsTrigger 
-            value="overview" 
+          <TabsTrigger
+            value="overview"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Overview
           </TabsTrigger>
-          <TabsTrigger 
-            value="mechanics" 
+          <TabsTrigger
+            value="mechanics"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Mechanics
           </TabsTrigger>
-          <TabsTrigger 
-            value="strategy" 
+          <TabsTrigger
+            value="strategy"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Strategy
           </TabsTrigger>
-          <TabsTrigger 
-            value="builds" 
+          <TabsTrigger
+            value="builds"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Class Builds
@@ -511,11 +545,11 @@ function ChampionDrakathGuide() {
           value="overview"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -551,11 +585,11 @@ function ChampionDrakathGuide() {
             </CardContent>
           </Card>
 
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -594,11 +628,11 @@ function ChampionDrakathGuide() {
           value="mechanics"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -652,11 +686,11 @@ function ChampionDrakathGuide() {
           value="strategy"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 0 15px ${currentTheme}20`
+              boxShadow: `0 0 15px ${currentTheme}20`,
             }}
           >
             <CardHeader>
@@ -710,11 +744,11 @@ function ChampionDrakathGuide() {
             </CardContent>
           </Card>
 
-          <Card 
+          <Card
             className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 0 15px ${currentTheme}20`
+              boxShadow: `0 0 15px ${currentTheme}20`,
             }}
           >
             <CardHeader>
@@ -773,11 +807,11 @@ function ChampionDrakathGuide() {
           className="space-y-4 text-white"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -811,11 +845,11 @@ function ChampionDrakathGuide() {
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -849,11 +883,11 @@ function ChampionDrakathGuide() {
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -885,11 +919,11 @@ function ChampionDrakathGuide() {
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -932,7 +966,7 @@ function ChampionDrakathGuide() {
 
 function UltraNulgathGuide() {
   const currentTheme = themeColors["ultra-nulgath"];
-  
+
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -942,39 +976,39 @@ function UltraNulgathGuide() {
           className="w-full h-auto rounded-lg shadow-lg border transition-all duration-300 hover:shadow-xl"
           style={{
             borderColor: `${currentTheme}66`,
-            boxShadow: `0 0 30px ${currentTheme}20`
+            boxShadow: `0 0 30px ${currentTheme}20`,
           }}
         />
       </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList 
+        <TabsList
           className="grid w-full grid-cols-4 bg-black/80 backdrop-blur-sm transition-all duration-500 p-1"
           style={{
             borderColor: `${currentTheme}66`,
-            border: `1px solid ${currentTheme}66`
+            border: `1px solid ${currentTheme}66`,
           }}
         >
-          <TabsTrigger 
-            value="overview" 
+          <TabsTrigger
+            value="overview"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Overview
           </TabsTrigger>
-          <TabsTrigger 
-            value="mechanics" 
+          <TabsTrigger
+            value="mechanics"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Mechanics
           </TabsTrigger>
-          <TabsTrigger 
-            value="strategy" 
+          <TabsTrigger
+            value="strategy"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Strategy
           </TabsTrigger>
-          <TabsTrigger 
-            value="builds" 
+          <TabsTrigger
+            value="builds"
             className="tabs-trigger text-white transition-all duration-300 hover:scale-105"
           >
             Class Builds
@@ -985,11 +1019,11 @@ function UltraNulgathGuide() {
           value="overview"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -1025,11 +1059,11 @@ function UltraNulgathGuide() {
             </CardContent>
           </Card>
 
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -1068,11 +1102,11 @@ function UltraNulgathGuide() {
           value="mechanics"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/75 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-xl relative"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`
+              boxShadow: `0 8px 25px ${currentTheme}25, inset 0 1px 0 ${currentTheme}15`,
             }}
           >
             <CardHeader>
@@ -1088,37 +1122,78 @@ function UltraNulgathGuide() {
                   </h4>
                   <ul className="space-y-2 text-gray-200">
                     <li>
-                      • <span className="text-red-300 font-medium">Contract of Frailty:</span>{" "}
-                      Reduces defense by <span className="text-white font-medium">50%</span> for 10 seconds{" "}
-                      <span className="text-yellow-300">(Tauntable)</span>
+                      •{" "}
+                      <span className="text-red-300 font-medium">
+                        Contract of Frailty:
+                      </span>{" "}
+                      Reduces defense by{" "}
+                      <span className="text-white font-medium">
+                        50%
+                      </span>{" "}
+                      for 10 seconds{" "}
+                      <span className="text-yellow-300">
+                        (Tauntable)
+                      </span>
                     </li>
                     <li>
-                      • <span className="text-red-300 font-medium">Contract of Despair:</span>{" "}
-                      Applied to targets with Frailty. Reduces dodge and crit chance by{" "}
-                      <span className="text-white font-medium">75%</span> and outgoing damage by{" "}
-                      <span className="text-white font-medium">50%</span> for 10 seconds
+                      •{" "}
+                      <span className="text-red-300 font-medium">
+                        Contract of Despair:
+                      </span>{" "}
+                      Applied to targets with Frailty. Reduces
+                      dodge and crit chance by{" "}
+                      <span className="text-white font-medium">
+                        75%
+                      </span>{" "}
+                      and outgoing damage by{" "}
+                      <span className="text-white font-medium">
+                        50%
+                      </span>{" "}
+                      for 10 seconds
                     </li>
                     <li>
-                      • <span className="text-red-300 font-medium">Contract of Stagnation:</span>{" "}
-                      Applied to targets with Despair. Reduces defense and physical defense by{" "}
-                      <span className="text-white font-medium">100%</span>, haste by{" "}
-                      <span className="text-white font-medium">50%</span>, and incoming healing by{" "}
-                      <span className="text-white font-medium">80%</span> for 10 seconds
+                      •{" "}
+                      <span className="text-red-300 font-medium">
+                        Contract of Stagnation:
+                      </span>{" "}
+                      Applied to targets with Despair. Reduces
+                      defense and physical defense by{" "}
+                      <span className="text-white font-medium">
+                        100%
+                      </span>
+                      , haste by{" "}
+                      <span className="text-white font-medium">
+                        50%
+                      </span>
+                      , and incoming healing by{" "}
+                      <span className="text-white font-medium">
+                        80%
+                      </span>{" "}
+                      for 10 seconds
                     </li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-500/30">
                   <h4 className="text-purple-300 mb-2">
                     Behold the Power of the Abyss
                   </h4>
                   <ul className="space-y-2 text-gray-200">
                     <li>
-                      • Occurs every <span className="text-white font-medium">14 seconds</span>{" "}
-                      <span className="text-red-300">(Not Tauntable)</span>
+                      • Occurs every{" "}
+                      <span className="text-white font-medium">
+                        14 seconds
+                      </span>{" "}
+                      <span className="text-red-300">
+                        (Not Tauntable)
+                      </span>
                     </li>
                     <li>
-                      • Damage <span className="text-white font-medium">stacks</span> each time the Overfiend Blade dies
+                      • Damage{" "}
+                      <span className="text-white font-medium">
+                        stacks
+                      </span>{" "}
+                      each time the Overfiend Blade dies
                     </li>
                   </ul>
                 </div>
@@ -1129,13 +1204,24 @@ function UltraNulgathGuide() {
                   </h4>
                   <ul className="space-y-2 text-gray-200">
                     <li>
-                      • Applies <span className="text-red-300 font-medium">instant death</span> if not killed
+                      • Applies{" "}
+                      <span className="text-red-300 font-medium">
+                        instant death
+                      </span>{" "}
+                      if not killed
                     </li>
                     <li>
-                      • <span className="text-red-300 font-medium">Fatal DOT</span> in 40 seconds if blade is still alive
+                      •{" "}
+                      <span className="text-red-300 font-medium">
+                        Fatal DOT
+                      </span>{" "}
+                      in 40 seconds if blade is still alive
                     </li>
                     <li>
-                      • <span className="text-yellow-300">Ignores focus</span>
+                      •{" "}
+                      <span className="text-yellow-300">
+                        Ignores focus
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -1148,11 +1234,11 @@ function UltraNulgathGuide() {
           value="strategy"
           className="space-y-4 text-white"
         >
-          <Card 
+          <Card
             className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 0 15px ${currentTheme}20`
+              boxShadow: `0 0 15px ${currentTheme}20`,
             }}
           >
             <CardHeader>
@@ -1163,21 +1249,27 @@ function UltraNulgathGuide() {
             <CardContent>
               <div className="space-y-4 text-gray-200">
                 <div className="bg-blue-900/20 p-3 rounded-lg">
-                  <p className="text-blue-300 font-medium mb-2">Key Strategy Point:</p>
+                  <p className="text-blue-300 font-medium mb-2">
+                    Key Strategy Point:
+                  </p>
                   <p>
-                    For both strategies, DPS can kill the blade first if the DPS is not enough to kill Nulgath in 45 seconds.{" "}
-                    <span className="text-yellow-300">(Not needed if the DPS is potted)</span>
+                    For both strategies, DPS can kill the blade
+                    first if the DPS is not enough to kill
+                    Nulgath in 45 seconds.{" "}
+                    <span className="text-yellow-300">
+                      (Not needed if the DPS is potted)
+                    </span>
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card 
+          <Card
             className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 0 15px ${currentTheme}20`
+              boxShadow: `0 0 15px ${currentTheme}20`,
             }}
           >
             <CardHeader>
@@ -1187,16 +1279,19 @@ function UltraNulgathGuide() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-gray-200">
-                <p>Have two taunters ready and make them loop taunt Nulgath.</p>
+                <p>
+                  Have two taunters ready and make them loop
+                  taunt Nulgath.
+                </p>
               </div>
             </CardContent>
           </Card>
 
-          <Card 
+          <Card
             className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
             style={{
               borderColor: `${currentTheme}66`,
-              boxShadow: `0 0 15px ${currentTheme}20`
+              boxShadow: `0 0 15px ${currentTheme}20`,
             }}
           >
             <CardHeader>
@@ -1206,15 +1301,32 @@ function UltraNulgathGuide() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-gray-200">
-                <p className="text-green-300 font-medium mb-2">Optimal Taunt Timing:</p>
+                <p className="text-green-300 font-medium mb-2">
+                  Optimal Taunt Timing:
+                </p>
                 <ul className="space-y-2 ml-4">
                   <li>
-                    • <span className="text-yellow-300">First taunter:</span> Taunt Nulgath{" "}
-                    <span className="text-white font-medium">4 seconds after</span> the battle starts and when the taunt icon from second taunter fades
+                    •{" "}
+                    <span className="text-yellow-300">
+                      First taunter:
+                    </span>{" "}
+                    Taunt Nulgath{" "}
+                    <span className="text-white font-medium">
+                      4 seconds after
+                    </span>{" "}
+                    the battle starts and when the taunt icon
+                    from second taunter fades
                   </li>
                   <li>
-                    • <span className="text-yellow-300">Second taunter:</span> Taunt every time the{" "}
-                    <span className="text-purple-300 font-medium">"Behold"</span> text appears
+                    •{" "}
+                    <span className="text-yellow-300">
+                      Second taunter:
+                    </span>{" "}
+                    Taunt every time the{" "}
+                    <span className="text-purple-300 font-medium">
+                      "Behold"
+                    </span>{" "}
+                    text appears
                   </li>
                 </ul>
               </div>
@@ -1227,11 +1339,11 @@ function UltraNulgathGuide() {
           className="space-y-4 text-white"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -1248,7 +1360,9 @@ function UltraNulgathGuide() {
                     <li>• Arcana Weapon</li>
                     <li>• Wizard Class</li>
                     <li>• Base Forge | Wizard Helm</li>
-                    <li>• Vainglory/Lament/Penitence | Wizard Cape</li>
+                    <li>
+                      • Vainglory/Lament/Penitence | Wizard Cape
+                    </li>
                   </ul>
                 </div>
                 <div>
@@ -1256,17 +1370,18 @@ function UltraNulgathGuide() {
                     Potions:
                   </h5>
                   <p className="text-sm text-gray-200">
-                    Sage Tonic / Potent Malevolence Elixir / Scroll of Enrage (SoE)
+                    Sage Tonic / Potent Malevolence Elixir /
+                    Scroll of Enrage (SoE)
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -1280,7 +1395,9 @@ function UltraNulgathGuide() {
                     Enhancements:
                   </h5>
                   <ul className="text-sm text-gray-200 space-y-1">
-                    <li>• Ravenous/Praxis Weapon | Awe Blast</li>
+                    <li>
+                      • Ravenous/Praxis Weapon | Awe Blast
+                    </li>
                     <li>• Luck Class</li>
                     <li>• Base Forge Helm | Luck</li>
                     <li>• Lament Cape | Luck</li>
@@ -1291,17 +1408,18 @@ function UltraNulgathGuide() {
                     Potions:
                   </h5>
                   <p className="text-sm text-gray-200">
-                    Fate Tonic / Potent Battle Elixir / Scroll of Enrage (SoE)
+                    Fate Tonic / Potent Battle Elixir / Scroll
+                    of Enrage (SoE)
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -1315,7 +1433,9 @@ function UltraNulgathGuide() {
                     Enhancements:
                   </h5>
                   <ul className="text-sm text-gray-200 space-y-1">
-                    <li>• Arcana's Concerto Weapon | Awe Blast</li>
+                    <li>
+                      • Arcana's Concerto Weapon | Awe Blast
+                    </li>
                     <li>• Luck Class</li>
                     <li>• Base Forge Helm | Luck Helm</li>
                     <li>• Penitence Cape | Luck Cape</li>
@@ -1326,17 +1446,18 @@ function UltraNulgathGuide() {
                     Potions:
                   </h5>
                   <p className="text-sm text-gray-200">
-                    Sage Tonic / Divine Elixir / Felicitous Philtre | Dark Grip (Member only)
+                    Sage Tonic / Divine Elixir / Felicitous
+                    Philtre | Dark Grip (Member only)
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card 
+            <Card
               className="bg-black/80 backdrop-blur-sm transition-all duration-300 hover:bg-black/85 hover:shadow-lg"
               style={{
                 borderColor: `${currentTheme}66`,
-                boxShadow: `0 0 15px ${currentTheme}20`
+                boxShadow: `0 0 15px ${currentTheme}20`,
               }}
             >
               <CardHeader>
@@ -1361,7 +1482,8 @@ function UltraNulgathGuide() {
                     Potions:
                   </h5>
                   <p className="text-sm text-gray-200">
-                    Unstable Sage Tonic / Unstable Malevolence Elixir / Potent Honor Potion
+                    Unstable Sage Tonic / Unstable Malevolence
+                    Elixir / Potent Honor Potion
                   </p>
                 </div>
               </CardContent>
