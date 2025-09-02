@@ -16,6 +16,7 @@ import {
 } from "./components/ui/tabs";
 import { ScrollArea } from "./components/ui/scroll-area";
 import { Separator } from "./components/ui/separator";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./components/ui/dialog";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import {
   Sword,
@@ -25,16 +26,30 @@ import {
   Flame,
   Zap,
   Volume2,
-  MessageCircle,
+  User,
+  Eye,
+  Lock,
+  Wrench,
 } from "lucide-react";
+import { DiscordIcon } from "./components/DiscordIcon";
 import championDrakathImage from "figma:asset/ea747cd7ef0f62b7f10a916bab2973f734662889.png";
 import ultraNulgathImage from "figma:asset/071c2b26a2311bd10eedb84b4ab7e6b3f520087a.png";
 import ultraDageImage from "figma:asset/3f95d1ffc35d266e13456f747e0f1cd22d633657.png";
+import ultraAvatarTyndariusImage from "figma:asset/0d6038d5a081fb6ae4e3baed609ab931dc0c2147.png";
+import ultraEzrajalImage from "figma:asset/068abc3ba3f628802dbcddea741a2853d8b70055.png";
+import ultraWardenImage from "figma:asset/a0a2d3aa4195d3e0d3203ec222d3a2ebd21defc5.png";
+import ultraEngineerImage from "figma:asset/8110d333b30749a024128b856a3be05752a3c105.png";
+import malgorImage from "figma:asset/6776654411d094ea986745c617458e0bfb7d55c1.png";
 import cruelLogo from "figma:asset/337a7d9ed614b4dbbc2134f4b3a94da58330a8aa.png";
 import { UltraDageGuide } from "./components/UltraDageGuide";
 import { UltraDarkonGuide } from "./components/UltraDarkonGuide";
 import { UltraDragoGuide } from "./components/UltraDragoGuide";
 import { UltraGramielGuide } from "./components/UltraGramielGuide";
+import { UltraAvatarTyndariusGuide } from "./components/UltraAvatarTyndariusGuide";
+import { UltraEzrajalGuide } from "./components/UltraEzrajalGuide";
+import { UltraWardenGuide } from "./components/UltraWardenGuide";
+import { UltraEngineerGuide } from "./components/UltraEngineerGuide";
+import { UltraSpeakerGuide } from "./components/UltraSpeakerGuide";
 
 const bosses = [
   {
@@ -81,9 +96,37 @@ const bosses = [
   },
   {
     id: "ultra-speaker",
-    name: "Ultra Speaker",
+    name: "Malgor",
     icon: Volume2,
     description: "The First Speaker",
+    difficulty: "Ultra",
+  },
+  {
+    id: "ultra-avatar-tyndarius",
+    name: "Ultra Avatar Tyndarius",
+    icon: User,
+    description: "And his balls",
+    difficulty: "Ultra",
+  },
+  {
+    id: "ultra-ezrajal",
+    name: "Ultra Ezrajal",
+    icon: Eye,
+    description: "The Antechamber",
+    difficulty: "Ultra",
+  },
+  {
+    id: "ultra-warden",
+    name: "Ultra Warden",
+    icon: Lock,
+    description: "The Reliquary",
+    difficulty: "Ultra",
+  },
+  {
+    id: "ultra-engineer",
+    name: "Ultra Engineer",
+    icon: Wrench,
+    description: "The Apex",
     difficulty: "Ultra",
   },
 ];
@@ -96,6 +139,10 @@ const themeColors = {
   "ultra-drago": "#b83e3f",
   "ultra-gramiel": "#dad6af",
   "ultra-speaker": "#d0181b",
+  "ultra-avatar-tyndarius": "#f3b233",
+  "ultra-ezrajal": "#a87220",
+  "ultra-warden": "#867050",
+  "ultra-engineer": "#6fafea",
 };
 
 export default function App() {
@@ -103,6 +150,7 @@ export default function App() {
     "champion-drakath",
   );
   const [animateIcon, setAnimateIcon] = useState(false);
+  const [aboutDialogOpen, setAboutDialogOpen] = useState(false);
 
   const currentBoss = bosses.find(
     (boss) => boss.id === selectedBoss,
@@ -242,26 +290,24 @@ export default function App() {
           >
             <div className="container mx-auto px-4 py-6">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={cruelLogo}
-                    alt="Cruel's Logo"
-                    className="h-12 w-12 object-contain transition-all duration-300 hover:rotate-12 hover:scale-110"
-                    style={{
-                      filter: `drop-shadow(0 0 10px ${currentTheme}40)`,
-                    }}
-                  />
-                  <div>
-                    <h1 className="text-3xl font-bold text-white transition-all duration-300 hover:scale-105">
-                      Cruel's AQW Ultra Guide
-                    </h1>
-                    <p
-                      className="transition-colors duration-500"
-                      style={{ color: currentTheme }}
-                    >
-                      Aenaen The Most Handsome Cruel
-                    </p>
-                  </div>
+                <img
+                  src={cruelLogo}
+                  alt="Cruel's Logo"
+                  className="h-12 w-12 object-contain transition-all duration-300 hover:rotate-12 hover:scale-110"
+                  style={{
+                    filter: `drop-shadow(0 0 10px ${currentTheme}40)`,
+                  }}
+                />
+                <div>
+                  <h1 className="text-3xl font-bold text-white transition-all duration-300 hover:scale-105">
+                    Cruel's AQW Ultra Guide
+                  </h1>
+                  <p
+                    className="transition-colors duration-500"
+                    style={{ color: currentTheme }}
+                  >
+                    Aenaen The Most Handsome Cruel
+                  </p>
                 </div>
               </div>
             </div>
@@ -421,6 +467,17 @@ export default function App() {
                       <UltraDragoGuide />
                     ) : selectedBoss === "ultra-gramiel" ? (
                       <UltraGramielGuide />
+                    ) : selectedBoss ===
+                      "ultra-avatar-tyndarius" ? (
+                      <UltraAvatarTyndariusGuide />
+                    ) : selectedBoss === "ultra-ezrajal" ? (
+                      <UltraEzrajalGuide />
+                    ) : selectedBoss === "ultra-warden" ? (
+                      <UltraWardenGuide />
+                    ) : selectedBoss === "ultra-engineer" ? (
+                      <UltraEngineerGuide />
+                    ) : selectedBoss === "ultra-speaker" ? (
+                      <UltraSpeakerGuide />
                     ) : (
                       <div className="py-12"></div>
                     )}
@@ -441,15 +498,65 @@ export default function App() {
             <div className="container mx-auto px-4 py-6">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-left">
-                  <p className="text-gray-300">
-                    © 2025 All rights reserved by{" "}
-                    <span
-                      className="font-medium transition-colors duration-500"
-                      style={{ color: currentTheme }}
+                  <Button
+                    variant="outline"
+                    className="text-white border-2 bg-transparent backdrop-blur-sm transition-all duration-300 hover:scale-105 px-4 py-2"
+                    style={{
+                      borderColor: `${currentTheme}60`,
+                      color: `${currentTheme}cc`,
+                      backgroundColor: 'transparent',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = `${currentTheme}80`;
+                      e.currentTarget.style.backgroundColor = `${currentTheme}10`;
+                      e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}30`;
+                      e.currentTarget.style.color = currentTheme;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = `${currentTheme}60`;
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.color = `${currentTheme}cc`;
+                    }}
+                    onClick={() => setAboutDialogOpen(true)}
+                  >
+                    About Cruel
+                  </Button>
+                  
+                  <Dialog open={aboutDialogOpen} onOpenChange={setAboutDialogOpen}>
+                    <DialogContent 
+                      className="bg-black/90 backdrop-blur-md border text-white max-w-2xl"
+                      style={{
+                        borderColor: `${currentTheme}66`,
+                        boxShadow: `0 8px 32px ${currentTheme}20`,
+                      }}
                     >
-                      Cruel
-                    </span>
-                  </p>
+                      <DialogHeader>
+                        <DialogTitle 
+                          className="text-2xl"
+                          style={{ color: currentTheme }}
+                        >
+                          About Cruel
+                        </DialogTitle>
+                        <DialogDescription className="text-gray-400">
+                          Information about Cruel and the guide creator
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="py-6">
+                        <div 
+                          className="text-center p-12 rounded-lg border"
+                          style={{
+                            borderColor: `${currentTheme}30`,
+                            backgroundColor: `${currentTheme}05`,
+                          }}
+                        >
+                          <p className="text-gray-400 italic">
+                            Content coming soon...
+                          </p>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -477,7 +584,7 @@ export default function App() {
                       e.currentTarget.style.opacity = "1";
                     }}
                   >
-                    <MessageCircle className="h-5 w-5" />
+                    <DiscordIcon className="h-5 w-5" />
                     <span>Join Our Discord</span>
                   </a>
                 </div>
