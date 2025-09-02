@@ -159,6 +159,15 @@ export default function App() {
   const currentTheme =
     themeColors[selectedBoss as keyof typeof themeColors];
 
+  // Set favicon
+  useEffect(() => {
+    const favicon = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    favicon.type = 'image/png';
+    favicon.rel = 'shortcut icon';
+    favicon.href = cruelLogo;
+    document.getElementsByTagName('head')[0].appendChild(favicon);
+  }, []);
+
   // Trigger icon animation when boss changes
   useEffect(() => {
     setAnimateIcon(true);
