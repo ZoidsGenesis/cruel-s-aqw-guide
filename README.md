@@ -1,7 +1,7 @@
 
-  # Website Design for AQW Guide (Community)
+  # AQW Ultra Guide
 
-  This is a code bundle for Website Design for AQW Guide (Community). The original project is available at https://www.figma.com/design/CD3rUwNTG1U7z0JXY0UrW6/Website-Design-for-AQW-Guide--Community-.
+  Made by Aenaen
 
   ## Running the code
 
