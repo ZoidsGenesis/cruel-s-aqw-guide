@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import {
   Card,
   CardContent,
@@ -285,6 +286,33 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Cruel - AQW Ultra Guide</title>
+        <meta name="description" content="test aenaen handsome" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content="Cruel - AQW Ultra Guide" />
+        <meta property="og:description" content="test aenaen handsome" />
+        <meta property="og:image" content="https://your-image-url-here.com/preview.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Cruel's AQW Ultra Guide" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={window.location.href} />
+        <meta property="twitter:title" content="Cruel - AQW Ultra Guide" />
+        <meta property="twitter:description" content="test aenaen handsome" />
+        <meta property="twitter:image" content="https://your-image-url-here.com/preview.jpg" />
+
+        {/* Additional meta tags for better SEO */}
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Cruel" />
+        <meta name="keywords" content="AQW, AdventureQuest Worlds, Ultra Boss, Guide, Gaming" />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       <style
         dangerouslySetInnerHTML={{ __html: dynamicStyles }}
       />
