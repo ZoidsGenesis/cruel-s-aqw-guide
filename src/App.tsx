@@ -15,9 +15,13 @@ import {
   TabsTrigger,
 } from "./components/ui/tabs";
 import { ScrollArea } from "./components/ui/scroll-area";
-import { Separator } from "./components/ui/separator";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./components/ui/dialog";
-import { ImageWithFallback } from "./components/figma/ImageWithFallback";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "./components/ui/dialog";
 import {
   Sword,
   Shield,
@@ -34,12 +38,6 @@ import {
 import { DiscordIcon } from "./components/DiscordIcon";
 import championDrakathImage from "figma:asset/ea747cd7ef0f62b7f10a916bab2973f734662889.png";
 import ultraNulgathImage from "figma:asset/071c2b26a2311bd10eedb84b4ab7e6b3f520087a.png";
-import ultraDageImage from "figma:asset/3f95d1ffc35d266e13456f747e0f1cd22d633657.png";
-import ultraAvatarTyndariusImage from "figma:asset/0d6038d5a081fb6ae4e3baed609ab931dc0c2147.png";
-import ultraEzrajalImage from "figma:asset/068abc3ba3f628802dbcddea741a2853d8b70055.png";
-import ultraWardenImage from "figma:asset/a0a2d3aa4195d3e0d3203ec222d3a2ebd21defc5.png";
-import ultraEngineerImage from "figma:asset/8110d333b30749a024128b856a3be05752a3c105.png";
-import malgorImage from "figma:asset/6776654411d094ea986745c617458e0bfb7d55c1.png";
 import cruelLogo from "figma:asset/337a7d9ed614b4dbbc2134f4b3a94da58330a8aa.png";
 import { UltraDageGuide } from "./components/UltraDageGuide";
 import { UltraDarkonGuide } from "./components/UltraDarkonGuide";
@@ -161,11 +159,15 @@ export default function App() {
 
   // Set favicon
   useEffect(() => {
-    const favicon = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    favicon.type = 'image/png';
-    favicon.rel = 'shortcut icon';
+    const favicon =
+      document.querySelector("link[rel*='icon']") ||
+      document.createElement("link");
+    favicon.type = "image/png";
+    favicon.rel = "shortcut icon";
     favicon.href = cruelLogo;
-    document.getElementsByTagName('head')[0].appendChild(favicon);
+    document
+      .getElementsByTagName("head")[0]
+      .appendChild(favicon);
   }, []);
 
   // Trigger icon animation when boss changes
@@ -513,55 +515,75 @@ export default function App() {
                     style={{
                       borderColor: `${currentTheme}60`,
                       color: `${currentTheme}cc`,
-                      backgroundColor: 'transparent',
+                      backgroundColor: "transparent",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = `${currentTheme}80`;
                       e.currentTarget.style.backgroundColor = `${currentTheme}10`;
                       e.currentTarget.style.boxShadow = `0 0 15px ${currentTheme}30`;
-                      e.currentTarget.style.color = currentTheme;
+                      e.currentTarget.style.color =
+                        currentTheme;
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = `${currentTheme}60`;
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.backgroundColor =
+                        "transparent";
+                      e.currentTarget.style.boxShadow = "none";
                       e.currentTarget.style.color = `${currentTheme}cc`;
                     }}
                     onClick={() => setAboutDialogOpen(true)}
                   >
                     About Cruel
                   </Button>
-                  
-                  <Dialog open={aboutDialogOpen} onOpenChange={setAboutDialogOpen}>
-                    <DialogContent 
-                      className="bg-black/90 backdrop-blur-md border text-white max-w-2xl"
+
+                  <Dialog
+                    open={aboutDialogOpen}
+                    onOpenChange={setAboutDialogOpen}
+                  >
+                    <DialogContent
+                      className="bg-black/90 backdrop-blur-md border text-white max-w-md sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto"
                       style={{
                         borderColor: `${currentTheme}66`,
                         boxShadow: `0 8px 32px ${currentTheme}20`,
                       }}
                     >
                       <DialogHeader>
-                        <DialogTitle 
-                          className="text-2xl"
+                        <DialogTitle
+                          className="text-xl sm:text-2xl"
                           style={{ color: currentTheme }}
                         >
                           About Cruel
                         </DialogTitle>
-                        <DialogDescription className="text-gray-400">
-                          Information about Cruel and the guide creator
+                        <DialogDescription className="text-gray-400 text-sm sm:text-base">
+                          Information about Cruel
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="py-6">
-                        <div 
-                          className="text-center p-12 rounded-lg border"
+                      <div className="py-4 sm:py-6">
+                        <div
+                          className="text-center p-4 sm:p-6 rounded-lg border"
                           style={{
                             borderColor: `${currentTheme}30`,
                             backgroundColor: `${currentTheme}05`,
                           }}
                         >
-                          <p className="text-gray-400 italic">
-                            Content coming soon...
+                          <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                            Join our Discord community!
                           </p>
+                          <div className="flex justify-center">
+                            <iframe
+                              src="https://discord.com/widget?id=1347484410462732308&theme=dark"
+                              width="100%"
+                              height="400"
+                              allowtransparency="true"
+                              frameborder="0"
+                              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                              className="rounded-lg border w-full max-w-[350px] h-[400px] sm:h-[500px]"
+                              style={{
+                                borderColor: `${currentTheme}40`,
+                                boxShadow: `0 0 20px ${currentTheme}30`,
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
                     </DialogContent>
