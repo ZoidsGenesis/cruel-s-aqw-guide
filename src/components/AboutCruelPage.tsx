@@ -624,7 +624,7 @@ export function AboutCruelPage({ onBack }: AboutCruelPageProps) {
                 <img src={cruelLogo} alt="Cruel's Logo" className="ap-brand-logo" />
                 <div>
                   <h1 className="ap-brand-title">About Cruel</h1>
-                  <p className="ap-brand-sub">Aenaen The Most Handsome Cruel</p>
+                  <p className="ap-brand-sub">AQW Best/Worst Guild</p>
                 </div>
               </div>
               <button className="ap-back-btn" onClick={onBack}>
