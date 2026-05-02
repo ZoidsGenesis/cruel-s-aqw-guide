@@ -371,7 +371,7 @@ export default function App() {
                     className="transition-colors duration-500"
                     style={{ color: currentTheme }}
                   >
-                    Aenaen The Most Handsome Cruel
+                    AQW Best/Worst Guild
                   </p>
                 </div>
               </div>
