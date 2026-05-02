@@ -687,11 +687,11 @@ export function AboutCruelPage({ onBack }: AboutCruelPageProps) {
                 <p className="ap-body-text">
                   We are{" "}
                   <span className="ap-accent-red">Cruel</span>, We drag each
-                  other down, but we love our leader{" "}
+                  others down, We suck each others wiwi and we love our leader{" "}
                   <span className="ap-accent-red">Xyronius</span> and{" "}
                   <span className="ap-accent-red">HBK</span>{" "}
                   <span className="ap-muted">
-                    (just kidding this is only a test)
+                    (jk this web is only a test)
                   </span>
                 </p>
               </div>
